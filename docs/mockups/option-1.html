@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Door-to-Gate Pulse</title>
+  <style>
+    :root {
+      --bg: #0a1020;
+      --bg-2: #111b36;
+      --card: #151f3f;
+      --line: #25315d;
+      --txt: #ecf1ff;
+      --muted: #9eb2e4;
+      --accent: #4f8cff;
+      --ok: #24c18d;
+      --warn: #ffb020;
+      --danger: #ff5d6c;
+    }
+
+    * { box-sizing: border-box; font-family: Inter, system-ui, -apple-system, sans-serif; }
+    body {
+      margin: 0;
+      color: var(--txt);
+      background: radial-gradient(circle at 10% 0%, #17244a, var(--bg));
+      min-height: 100vh;
+    }
+
+    .wrap { max-width: 1180px; margin: 20px auto; padding: 0 14px 20px; }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    .subtitle { color: var(--muted); margin-top: 3px; font-size: 14px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      border: 1px solid transparent;
+    }
+    .pill.ok { background: #11392f; color: #73efc6; border-color: #215e4d; }
+    .pill.warn { background: #4a3512; color: #ffd08f; border-color: #7a5722; }
+    .pill.bad { background: #4a1722; color: #ff9eaa; border-color: #6a2433; }
+
+    .layout { display: grid; gap: 12px; grid-template-columns: repeat(12, 1fr); }
+    .card {
+      background: linear-gradient(180deg, #1a2650, var(--card));
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .span-3 { grid-column: span 3; }
+    .span-4 { grid-column: span 4; }
+    .span-5 { grid-column: span 5; }
+    .span-7 { grid-column: span 7; }
+    .span-8 { grid-column: span 8; }
+    .span-12 { grid-column: span 12; }
+
+    .label {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .kpi { font-size: 34px; font-weight: 700; line-height: 1; margin-bottom: 8px; }
+    .kpi small { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .trend { color: var(--muted); font-size: 13px; }
+
+    .stack { display: grid; gap: 8px; }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--line);
+      padding: 8px 0;
+      font-size: 14px;
+    }
+    .row:last-child { border-bottom: 0; }
+    .row .muted { color: var(--muted); }
+
+    .progress {
+      margin-top: 10px;
+      background: #0f1730;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      height: 12px;
+      overflow: hidden;
+    }
+    .progress > span {
+      display: block;
+      height: 100%;
+      width: 84%;
+      background: linear-gradient(90deg, var(--ok), #70ffc7);
+    }
+
+    .impact-bar {
+      height: 9px;
+      border-radius: 999px;
+      background: #0f1730;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .impact-bar span { display: block; height: 100%; background: linear-gradient(90deg, #fbbf24, #f97316); }
+
+    .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    button, select, input {
+      border-radius: 9px;
+      border: 1px solid #304179;
+      background: #131c38;
+      color: var(--txt);
+      padding: 9px 10px;
+      font-size: 13px;
+    }
+    button { background: var(--accent); border-color: #6b9eff; cursor: pointer; }
+    button.secondary { background: #2c3868; border-color: #465896; }
+
+    .report-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 9px 8px; font-size: 13px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    .map {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #131d3c, #0e162c);
+      border-radius: 10px;
+      padding: 10px;
+      min-height: 130px;
+    }
+    .map-route {
+      margin-top: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #253765;
+      position: relative;
+    }
+    .map-route::before, .map-route::after {
+      content: "";
+      position: absolute;
+      top: -3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--ok);
+    }
+    .map-route::before { left: 22%; }
+    .map-route::after { right: 11%; background: var(--warn); }
+
+    @media (max-width: 980px) {
+      .span-3, .span-4, .span-5, .span-7, .span-8 { grid-column: span 12; }
+      .report-form { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .report-form { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div>
+        <h1>Door-to-Gate Pulse</h1>
+        <p class="subtitle">Real-time traveler intelligence from your door to your departure gate.</p>
+      </div>
+      <div class="pill ok" id="confidencePill">84% chance on-time gate arrival</div>
+    </header>
+
+    <main class="layout">
+      <section class="card span-3">
+        <div class="label">Drive / GPS</div>
+        <div class="kpi" id="driveTime">32 <small>min</small></div>
+        <p class="trend">Traffic trend: <span class="pill warn">Moderate</span></p>
+      </section>
+
+      <section class="card span-3">
+        <div class="label">TSA Wait</div>
+        <div class="kpi" id="tsaTime">18 <small>min</small></div>
+        <p class="trend">Checkpoint C2: <span class="pill ok">Improving</span></p>
+      </section>
+
+      <section class="card span-3">
+        <div class="label">Weather Impact</div>
+        <div class="kpi" id="weatherImpact">14 <small>%</small></div>
+        <p class="trend">Rain bands north of field until 6:20 PM</p>
+        <div class="impact-bar"><span id="weatherBar" style="width:14%"></span></div>
+      </section>
+
+      <section class="card span-3">
+        <div class="label">Gate Arrival Confidence</div>
+        <div class="kpi" id="confidence">84 <small>%</small></div>
+        <p class="trend">Calculated from drive, TSA, weather, and crowd reports</p>
+        <div class="progress"><span id="confidenceBar"></span></div>
+      </section>
+
+      <section class="card span-7 stack">
+        <div class="label">Flight + Incoming Aircraft</div>
+        <div class="row"><span class="muted">Flight</span><strong>FR 2419 to LAX</strong></div>
+        <div class="row"><span class="muted">Scheduled Departure</span><span>6:45 PM</span></div>
+        <div class="row"><span class="muted">Boarding</span><span>6:10 PM at Gate B18</span></div>
+        <div class="row"><span class="muted">Status</span><span class="pill ok">On Time</span></div>
+        <div class="row"><span class="muted">Incoming Aircraft</span><span>N381FR from SFO, currently 43 mi out</span></div>
+        <div class="row"><span class="muted">Incoming ETA at Gate</span><strong>5:58 PM</strong></div>
+      </section>
+
+      <section class="card span-5">
+        <div class="label">Incoming Flight Position</div>
+        <div class="map">
+          <div class="row"><span class="muted">Current phase</span><strong>Descent</strong></div>
+          <div class="row"><span class="muted">Last update</span><span>45 sec ago</span></div>
+          <div class="row"><span class="muted">On-time flag</span><span class="pill ok">Expected at gate on schedule</span></div>
+          <div class="map-route" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <section class="card span-12">
+        <div class="label">Community Feedback Network</div>
+        <p class="subtitle">Reports from travelers update everyone’s estimates in real time.</p>
+        <form class="report-form" id="reportForm">
+          <select id="reportType" aria-label="Report type">
+            <option value="TSA">TSA Wait</option>
+            <option value="Traffic">Traffic Delay</option>
+            <option value="Gate">Gate Status</option>
+          </select>
+          <input id="reportValue" type="text" placeholder="e.g., 12 min or Gate moved to B20" required />
+          <input id="reportUser" type="text" placeholder="Your handle (optional)" />
+          <button type="submit">Submit Report</button>
+        </form>
+      </section>
+
+      <section class="card span-8">
+        <div class="label">Live Crowd Reports</div>
+        <table>
+          <thead>
+            <tr><th>User</th><th>Update</th><th>Time</th></tr>
+          </thead>
+          <tbody id="reportTable">
+            <tr><td>@MiaR</td><td>TSA PreCheck line moving fast, now ~10 mins</td><td>2m ago</td></tr>
+            <tr><td>@TravelDad21</td><td>Terminal B curbside backed up near departures</td><td>4m ago</td></tr>
+            <tr><td>@KikoFlys</td><td>Gate B22 changed to B18</td><td>6m ago</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card span-4">
+        <div class="label">Quick Actions</div>
+        <div class="btns">
+          <button type="button" id="fasterTsa">TSA Improving</button>
+          <button type="button" class="secondary" id="worseTraffic">Traffic Slowing</button>
+          <button type="button" class="secondary" id="weatherSpike">Weather Spike</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const driveTime = document.getElementById('driveTime')
+    const tsaTime = document.getElementById('tsaTime')
+    const weatherImpact = document.getElementById('weatherImpact')
+    const weatherBar = document.getElementById('weatherBar')
+    const confidence = document.getElementById('confidence')
+    const confidenceBar = document.getElementById('confidenceBar')
+    const confidencePill = document.getElementById('confidencePill')
+    const reportTable = document.getElementById('reportTable')
+
+    const state = { drive: 32, tsa: 18, weather: 14, confidence: 84 }
+
+    function render() {
+      driveTime.innerHTML = `${state.drive} <small>min</small>`
+      tsaTime.innerHTML = `${state.tsa} <small>min</small>`
+      weatherImpact.innerHTML = `${state.weather} <small>%</small>`
+      confidence.innerHTML = `${state.confidence} <small>%</small>`
+      confidenceBar.style.width = `${state.confidence}%`
+      weatherBar.style.width = `${state.weather}%`
+      confidencePill.textContent = `${state.confidence}% chance on-time gate arrival`
+    }
+
+    function recalcConfidence() {
+      const penalty = state.drive * 0.35 + state.tsa * 0.7 + state.weather * 1.2
+      state.confidence = Math.max(52, Math.min(97, Math.round(100 - penalty / 2.8)))
+      render()
+    }
+
+    document.getElementById('fasterTsa').addEventListener('click', () => {
+      state.tsa = Math.max(5, state.tsa - 4)
+      recalcConfidence()
+    })
+
+    document.getElementById('worseTraffic').addEventListener('click', () => {
+      state.drive = Math.min(65, state.drive + 6)
+      recalcConfidence()
+    })
+
+    document.getElementById('weatherSpike').addEventListener('click', () => {
+      state.weather = Math.min(60, state.weather + 8)
+      recalcConfidence()
+    })
+
+    document.getElementById('reportForm').addEventListener('submit', (event) => {
+      event.preventDefault()
+      const type = document.getElementById('reportType').value
+      const value = document.getElementById('reportValue').value.trim()
+      const userInput = document.getElementById('reportUser').value.trim()
+      if (!value) return
+
+      const user = userInput ? `@${userInput.replace(/^@+/, '')}` : '@You'
+      const row = document.createElement('tr')
+      row.innerHTML = `<td>${user}</td><td>${type}: ${value}</td><td>now</td>`
+      reportTable.prepend(row)
+
+      if (type === 'TSA') state.tsa = Math.max(5, Math.min(60, parseInt(value, 10) || state.tsa))
+      if (type === 'Traffic') state.drive = Math.max(10, Math.min(90, parseInt(value, 10) || state.drive))
+      if (type === 'Gate') state.confidence = Math.max(52, Math.min(97, state.confidence + 1))
+      recalcConfidence()
+
+      event.target.reset()
+    })
+
+    recalcConfidence()
+  </script>
+</body>
+</html>
