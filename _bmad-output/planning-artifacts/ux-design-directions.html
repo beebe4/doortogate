@@ -286,6 +286,9 @@
     }
 
     .iphone {
+      width: 360px;
+      min-width: 360px;
+      max-width: 360px;
       border-radius: 42px;
       border: 2px solid #b9ab99;
       background: #1f1a16;
@@ -307,6 +310,7 @@
     }
 
     .iphone-screen {
+      width: 100%;
       border-radius: 32px;
       background: #fffdf8;
       border: 1px solid #d8ccbe;
@@ -384,6 +388,21 @@
       border-bottom: 1px solid #e9dfd3;
     }
 
+    .demo-row span:first-child {
+      flex: 0 0 42%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .demo-row span:last-child {
+      flex: 1;
+      text-align: right;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .demo-row:last-child { border-bottom: 0; }
 
     .demo-cta {
@@ -435,7 +454,12 @@
 
     @media (max-width: 980px) {
       .demo-wrap { grid-template-columns: 1fr; }
-      .iphone { max-width: 390px; margin: 0 auto; }
+      .iphone {
+        width: min(360px, calc(100vw - 40px));
+        min-width: 0;
+        max-width: 390px;
+        margin: 0 auto;
+      }
     }
 
     .tabs4 {
