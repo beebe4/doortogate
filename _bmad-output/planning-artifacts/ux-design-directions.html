@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Door-to-Gate - UX Design Directions</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #111b31;
+      --line: #233253;
+      --text: #ecf2ff;
+      --muted: #9db0d8;
+      --accent: #4b8bff;
+      --ok: #28c48f;
+      --warn: #f5a623;
+      --risk: #e95463;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 10% 0%, #172742, var(--bg));
+      color: var(--text);
+      font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+    }
+
+    .page {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    .meta { color: var(--muted); font-size: 14px; }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 20px;
+    }
+
+    button {
+      background: #14203a;
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    button.active { background: #1a3264; border-color: #3d67c2; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 14px;
+    }
+
+    .dir {
+      background: linear-gradient(180deg, #13203a, #101a2f);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .dir-head {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .pill {
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid #35538f;
+      background: #1a315f;
+      color: #cfe0ff;
+      padding: 5px 8px;
+      white-space: nowrap;
+    }
+
+    .dir-sub { color: var(--muted); font-size: 12px; margin-top: 5px; }
+
+    .phone {
+      margin: 12px;
+      border: 1px solid #2a3e67;
+      border-radius: 20px;
+      background: #0e1730;
+      padding: 12px;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .kpi {
+      border: 1px solid #324a78;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: #122043;
+    }
+
+    .score { font-size: 34px; font-weight: 700; line-height: 1; }
+    .small { color: var(--muted); font-size: 12px; }
+
+    .bar {
+      margin-top: 8px;
+      height: 8px;
+      border-radius: 999px;
+      border: 1px solid #375189;
+      background: #0d1731;
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      width: 84%;
+      background: linear-gradient(90deg, var(--ok), #7af7c6);
+    }
+
+    .card {
+      border: 1px solid #2b426f;
+      border-radius: 12px;
+      background: #101d3b;
+      padding: 9px;
+      margin-bottom: 8px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+      padding: 5px 0;
+      border-bottom: 1px solid #213458;
+    }
+
+    .row:last-child { border-bottom: 0; }
+
+    .cta {
+      width: 100%;
+      border-radius: 10px;
+      border: 0;
+      background: #3b79ef;
+      color: #fff;
+      padding: 10px;
+      font-weight: 600;
+      margin-top: 6px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+    .chip { font-size: 11px; padding: 4px 7px; border-radius: 999px; border: 1px solid #2f466f; }
+    .ok { color: #9ff5d5; background: #133c33; border-color: #266455; }
+    .warn { color: #ffd89c; background: #4a3410; border-color: #70501a; }
+    .risk { color: #ffb4bc; background: #511723; border-color: #7a2838; }
+
+    .notes {
+      padding: 12px 14px 14px;
+      border-top: 1px solid var(--line);
+      background: #0e1730;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div>
+        <h1>Door-to-Gate Design Directions</h1>
+        <p class="meta">6 visual directions for calm premium in-transit reassurance</p>
+      </div>
+      <div class="pill">Version 1 · 2026-02-17</div>
+    </div>
+
+    <div class="controls">
+      <button class="active" data-filter="all">Show All</button>
+      <button data-filter="minimal">Minimal</button>
+      <button data-filter="data">Data Dense</button>
+      <button data-filter="glance">Glanceable</button>
+      <button data-filter="narrative">Narrative</button>
+    </div>
+
+    <div class="grid" id="grid">
+      <section class="dir" data-tags="minimal glance">
+        <div class="dir-head">
+          <div>
+            <h3>Direction 1 · Calm Card Stack</h3>
+            <p class="dir-sub">Confidence-first single-column cards</p>
+          </div>
+          <span class="pill">Minimal</span>
+        </div>
+        <div class="phone">
+          <div class="top"><span>Now</span><span>Updated 30s ago</span></div>
+          <div class="kpi">
+            <div class="score">84%</div>
+            <div class="small">On-time gate confidence</div>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+          <div class="card">
+            <div class="row"><span>Leave by</span><strong>3:32 PM</strong></div>
+            <div class="row"><span>TSA</span><span>18 min</span></div>
+            <div class="row"><span>Drive</span><span>32 min</span></div>
+          </div>
+          <div class="chips">
+            <span class="chip ok">On Track</span>
+            <span class="chip warn">Rain Risk 14%</span>
+          </div>
+          <div class="cta">View What Changed</div>
+        </div>
+        <div class="notes">Best for low cognitive load and reassurance-first hierarchy.</div>
+      </section>
+
+      <section class="dir" data-tags="data">
+        <div class="dir-head">
+          <div>
+            <h3>Direction 2 · Ops Dashboard</h3>
+            <p class="dir-sub">Compact telemetry with trend mini-panels</p>
+          </div>
+          <span class="pill">Data Dense</span>
+        </div>
+        <div class="phone">
+          <div class="top"><span>Risk Monitor</span><span>Live</span></div>
+          <div class="card">
+            <div class="row"><span>Confidence</span><strong>78%</strong></div>
+            <div class="row"><span>Delta</span><span>-6% / 20m</span></div>
+            <div class="row"><span>Trend</span><span>\u2193 moderate</span></div>
+          </div>
+          <div class="card">
+            <div class="row"><span>Traffic</span><span>+7 min</span></div>
+            <div class="row"><span>TSA C2</span><span>24 min</span></div>
+            <div class="row"><span>Inbound jet</span><span>43 mi / on-time</span></div>
+          </div>
+          <div class="chips">
+            <span class="chip warn">Monitor</span>
+            <span class="chip risk">Action Soon</span>
+          </div>
+          <div class="cta">Recalculate Plan</div>
+        </div>
+        <div class="notes">Best for users who want detail and rapid diagnostics.</div>
+      </section>
+
+      <section class="dir" data-tags="glance minimal">
+        <div class="dir-head">
+          <div>
+            <h3>Direction 3 · Timeline Flow</h3>
+            <p class="dir-sub">Journey steps with confidence checkpoints</p>
+          </div>
+          <span class="pill">Journey</span>
+        </div>
+        <div class="phone">
+          <div class="top"><span>Door \u2192 Gate</span><span>T-2h 58m</span></div>
+          <div class="kpi">
+            <div class="score">82%</div>
+            <div class="small">Recommended: leave in 14 min</div>
+          </div>
+          <div class="card">
+            <div class="row"><span>1. Depart Home</span><span>3:30 PM</span></div>
+            <div class="row"><span>2. Clear TSA</span><span>4:24 PM</span></div>
+            <div class="row"><span>3. Reach Gate B18</span><span>5:50 PM</span></div>
+          </div>
+          <div class="chips">
+            <span class="chip ok">Plan Stable</span>
+          </div>
+          <div class="cta">Share Plan</div>
+        </div>
+        <div class="notes">Best for making progress and completion highly tangible.</div>
+      </section>
+
+      <section class="dir" data-tags="narrative">
+        <div class="dir-head">
+          <div>
+            <h3>Direction 4 · Concierge Narrative</h3>
+            <p class="dir-sub">Natural-language guidance with action cards</p>
+          </div>
+          <span class="pill">Narrative</span>
+        </div>
+        <div class="phone">
+          <div class="top"><span>Assistant</span><span>Just now</span></div>
+          <div class="card">
+            <p class="small">You are still on track. TSA increased by 6 minutes. Leave in 12 minutes instead of 18 to maintain arrival confidence.</p>
+          </div>
+          <div class="card">
+            <div class="row"><span>Why changed</span><span>TSA + weather drift</span></div>
+            <div class="row"><span>Impact</span><span>-5% confidence</span></div>
+            <div class="row"><span>Freshness</span><span>45 sec</span></div>
+          </div>
+          <div class="chips">
+            <span class="chip warn">Attention</span>
+          </div>
+          <div class="cta">Adjust Departure</div>
+        </div>
+        <div class="notes">Best for lowering anxiety with plain-language coaching.</div>
+      </section>
+
+      <section class="dir" data-tags="glance">
+        <div class="dir-head">
+          <div>
+            <h3>Direction 5 · Widget-First</h3>
+            <p class="dir-sub">Glanceable component model expanded in app</p>
+          </div>
+          <span class="pill">Glanceable</span>
+        </div>
+        <div class="phone">
+          <div class="kpi">
+            <div class="score">80%</div>
+            <div class="small">Leave in 16 min</div>
+            <div class="bar"><div class="fill" style="width:80%"></div></div>
+          </div>
+          <div class="card">
+            <div class="row"><span>Status</span><span>Monitor</span></div>
+            <div class="row"><span>Offline</span><span>No</span></div>
+            <div class="row"><span>Last fresh data</span><span>22 sec ago</span></div>
+          </div>
+          <div class="chips">
+            <span class="chip ok">Widget Ready</span>
+            <span class="chip warn">Open for details</span>
+          </div>
+          <div class="cta">Open Full View</div>
+        </div>
+        <div class="notes">Best for habitual check-ins and low-friction re-entry.</div>
+      </section>
+
+      <section class="dir" data-tags="minimal data">
+        <div class="dir-head">
+          <div>
+            <h3>Direction 6 · Split Focus Hybrid</h3>
+            <p class="dir-sub">Hero confidence + compact diagnostics rail</p>
+          </div>
+          <span class="pill">Balanced</span>
+        </div>
+        <div class="phone">
+          <div class="top"><span>Action Needed in 9 min</span><span>Risk Rising</span></div>
+          <div class="kpi">
+            <div class="score">72%</div>
+            <div class="small">Confidence trending down</div>
+            <div class="bar"><div class="fill" style="width:72%"></div></div>
+          </div>
+          <div class="card">
+            <div class="row"><span>Primary risk</span><span>TSA spike</span></div>
+            <div class="row"><span>Secondary</span><span>Traffic +4 min</span></div>
+            <div class="row"><span>Fallback</span><span>Use Checkpoint C3</span></div>
+          </div>
+          <div class="chips">
+            <span class="chip risk">Action Needed</span>
+          </div>
+          <div class="cta">Start Leave Flow</div>
+        </div>
+        <div class="notes">Best all-around option balancing reassurance and diagnostics.</div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('button[data-filter]')
+    const cards = document.querySelectorAll('.dir')
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        buttons.forEach((b) => b.classList.remove('active'))
+        button.classList.add('active')
+        const filter = button.getAttribute('data-filter')
+
+        cards.forEach((card) => {
+          if (filter === 'all') {
+            card.classList.remove('hidden')
+            return
+          }
+          const tags = card.getAttribute('data-tags') || ''
+          card.classList.toggle('hidden', !tags.includes(filter))
+        })
+      })
+    })
+  </script>
+</body>
+</html>
