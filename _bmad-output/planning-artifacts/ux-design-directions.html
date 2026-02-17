@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Door-to-Gate - UX Design Directions</title>
+  <title>Door2Gate - UX Design Directions</title>
   <style>
     :root {
-      --bg: #0b1220;
-      --panel: #111b31;
-      --line: #233253;
-      --text: #ecf2ff;
-      --muted: #9db0d8;
-      --accent: #4b8bff;
-      --ok: #28c48f;
-      --warn: #f5a623;
-      --risk: #e95463;
+      --bg: #f6f1e9;
+      --panel: #fbf8f2;
+      --line: #d8ccbe;
+      --text: #3f342b;
+      --muted: #7a6d60;
+      --accent: #6c9ca5;
+      --ok: #4b9f7b;
+      --warn: #c79a4a;
+      --risk: #bf6466;
     }
 
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: radial-gradient(circle at 10% 0%, #172742, var(--bg));
+      background: radial-gradient(circle at 10% 0%, #fffaf2, var(--bg));
       color: var(--text);
       font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
     }
@@ -51,7 +51,7 @@
     }
 
     button {
-      background: #14203a;
+      background: #eee5d9;
       color: var(--text);
       border: 1px solid var(--line);
       border-radius: 999px;
@@ -60,7 +60,7 @@
       cursor: pointer;
     }
 
-    button.active { background: #1a3264; border-color: #3d67c2; }
+    button.active { background: #d9cbbb; border-color: #b8a894; }
 
     .grid {
       display: grid;
@@ -69,11 +69,11 @@
     }
 
     .dir {
-      background: linear-gradient(180deg, #13203a, #101a2f);
+      background: linear-gradient(180deg, #fffaf3, #f5eee4);
       border: 1px solid var(--line);
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+      box-shadow: 0 8px 18px rgba(70, 52, 36, 0.12);
     }
 
     .dir-head {
@@ -88,9 +88,9 @@
     .pill {
       font-size: 11px;
       border-radius: 999px;
-      border: 1px solid #35538f;
-      background: #1a315f;
-      color: #cfe0ff;
+      border: 1px solid #bcae9a;
+      background: #ede3d7;
+      color: #5e5247;
       padding: 5px 8px;
       white-space: nowrap;
     }
@@ -99,9 +99,9 @@
 
     .phone {
       margin: 12px;
-      border: 1px solid #2a3e67;
+      border: 1px solid #d2c5b6;
       border-radius: 20px;
-      background: #0e1730;
+      background: #fffdf8;
       padding: 12px;
     }
 
@@ -115,11 +115,11 @@
     }
 
     .kpi {
-      border: 1px solid #324a78;
+      border: 1px solid #d7cab9;
       border-radius: 12px;
       padding: 10px;
       margin-bottom: 8px;
-      background: #122043;
+      background: #f7f1e8;
     }
 
     .score { font-size: 34px; font-weight: 700; line-height: 1; }
@@ -129,21 +129,21 @@
       margin-top: 8px;
       height: 8px;
       border-radius: 999px;
-      border: 1px solid #375189;
-      background: #0d1731;
+      border: 1px solid #d2c4b2;
+      background: #efe5d7;
       overflow: hidden;
     }
 
     .fill {
       height: 100%;
       width: 84%;
-      background: linear-gradient(90deg, var(--ok), #7af7c6);
+      background: linear-gradient(90deg, var(--ok), #7cb29b);
     }
 
     .card {
-      border: 1px solid #2b426f;
+      border: 1px solid #d8caba;
       border-radius: 12px;
-      background: #101d3b;
+      background: #faf5ec;
       padding: 9px;
       margin-bottom: 8px;
     }
@@ -154,7 +154,7 @@
       gap: 8px;
       font-size: 12px;
       padding: 5px 0;
-      border-bottom: 1px solid #213458;
+      border-bottom: 1px solid #e5d9cc;
     }
 
     .row:last-child { border-bottom: 0; }
@@ -163,8 +163,8 @@
       width: 100%;
       border-radius: 10px;
       border: 0;
-      background: #3b79ef;
-      color: #fff;
+      background: #6c9ca5;
+      color: #fffefb;
       padding: 10px;
       font-weight: 600;
       margin-top: 6px;
@@ -173,18 +173,285 @@
     }
 
     .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
-    .chip { font-size: 11px; padding: 4px 7px; border-radius: 999px; border: 1px solid #2f466f; }
-    .ok { color: #9ff5d5; background: #133c33; border-color: #266455; }
-    .warn { color: #ffd89c; background: #4a3410; border-color: #70501a; }
-    .risk { color: #ffb4bc; background: #511723; border-color: #7a2838; }
+    .chip { font-size: 11px; padding: 4px 7px; border-radius: 999px; border: 1px solid #d0c2b1; }
+    .ok { color: #2f6f55; background: #deefe6; border-color: #b8d9ca; }
+    .warn { color: #7e5b20; background: #f7ecd9; border-color: #e7d6b4; }
+    .risk { color: #8d3f45; background: #f8e3e5; border-color: #e9c6ca; }
 
     .notes {
       padding: 12px 14px 14px;
       border-top: 1px solid var(--line);
-      background: #0e1730;
+      background: #f8f2ea;
       font-size: 12px;
       color: var(--muted);
       line-height: 1.5;
+    }
+
+    .section-title {
+      margin: 26px 0 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .logo-card {
+      background: linear-gradient(180deg, #fffaf3, #f5eee4);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 8px 18px rgba(70, 52, 36, 0.12);
+    }
+
+    .logo-mark {
+      width: 100%;
+      height: 96px;
+      border: 1px solid #c9bdae;
+      border-radius: 12px;
+      background: #f2eee7;
+      display: grid;
+      place-items: center;
+      margin-bottom: 10px;
+    }
+
+    .logo-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .logo-note { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+    .sub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .journey-step {
+      background: linear-gradient(180deg, #fffaf3, #f5eee4);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 8px 18px rgba(70, 52, 36, 0.12);
+    }
+
+    .step-num {
+      display: inline-block;
+      font-size: 11px;
+      border-radius: 999px;
+      border: 1px solid #bcae9a;
+      background: #ede3d7;
+      color: #5e5247;
+      padding: 4px 8px;
+      margin-bottom: 8px;
+    }
+
+    .journey-step h3 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .journey-step p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+
+    .journey-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #51463c;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .demo-wrap {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 360px minmax(280px, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .iphone {
+      border-radius: 42px;
+      border: 2px solid #b9ab99;
+      background: #1f1a16;
+      padding: 10px;
+      box-shadow: 0 14px 26px rgba(48, 35, 24, 0.24);
+      position: relative;
+    }
+
+    .iphone-notch {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 24px;
+      border-radius: 0 0 14px 14px;
+      background: #181310;
+      z-index: 2;
+    }
+
+    .iphone-screen {
+      border-radius: 32px;
+      background: #fffdf8;
+      border: 1px solid #d8ccbe;
+      height: 710px;
+      padding: 26px 14px 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .demo-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #6c5f52;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .demo-kpi {
+      border: 1px solid #d6cab9;
+      background: #f7f1e8;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+
+    .demo-logo-wrap {
+      height: 88px;
+      margin-bottom: 8px;
+      border: 1px solid #d8ccbe;
+      border-radius: 12px;
+      background: #f8f2e8;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .demo-logo {
+      max-width: 84%;
+      max-height: 70px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .demo-score {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+      color: #3f342b;
+    }
+
+    .demo-sub {
+      color: #7d6f61;
+      font-size: 12px;
+      margin-top: 4px;
+      min-height: 32px;
+    }
+
+    .demo-card {
+      border: 1px solid #d8ccbe;
+      background: #fbf7f0;
+      border-radius: 12px;
+      padding: 8px 10px;
+      margin-bottom: 8px;
+    }
+
+    .demo-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 13px;
+      color: #4a3f36;
+      padding: 5px 0;
+      border-bottom: 1px solid #e9dfd3;
+    }
+
+    .demo-row:last-child { border-bottom: 0; }
+
+    .demo-cta {
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      background: #6c9ca5;
+      color: #fffdf8;
+      padding: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .demo-controls {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .demo-controls button {
+      flex: 1;
+      background: #ede3d7;
+      border: 1px solid #cdbda9;
+      color: #53473b;
+      padding: 8px 10px;
+    }
+
+    .demo-side {
+      background: linear-gradient(180deg, #fffaf3, #f5eee4);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 8px 18px rgba(70, 52, 36, 0.12);
+    }
+
+    .demo-side h3 {
+      margin-bottom: 8px;
+      font-size: 22px;
+    }
+
+    .demo-side p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 980px) {
+      .demo-wrap { grid-template-columns: 1fr; }
+      .iphone { max-width: 390px; margin: 0 auto; }
+    }
+
+    .tabs4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+      margin: 8px 0 12px;
+    }
+
+    .tabs4 .chip {
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 5px 4px;
+      font-size: 10px;
     }
 
     .hidden { display: none; }
@@ -194,8 +461,8 @@
   <div class="page">
     <div class="header">
       <div>
-        <h1>Door-to-Gate Design Directions</h1>
-        <p class="meta">6 visual directions for calm premium in-transit reassurance</p>
+        <h1>Door2Gate Design Directions</h1>
+        <p class="meta">6 visual directions plus light Option 5 explorations for calm travel reassurance</p>
       </div>
       <div class="pill">Version 1 · 2026-02-17</div>
     </div>
@@ -254,9 +521,12 @@
             <div class="row"><span>Trend</span><span>\u2193 moderate</span></div>
           </div>
           <div class="card">
+            <div class="row"><span>Airline</span><span>Frontier (FR)</span></div>
             <div class="row"><span>Traffic</span><span>+7 min</span></div>
             <div class="row"><span>TSA C2</span><span>24 min</span></div>
-            <div class="row"><span>Inbound jet</span><span>43 mi / on-time</span></div>
+            <div class="row"><span>Flight status</span><span>On-time · Gate B18</span></div>
+            <div class="row"><span>Inbound jet</span><span>43 mi out</span></div>
+            <div class="row"><span>ETA to gate</span><span>5:58 PM</span></div>
           </div>
           <div class="chips">
             <span class="chip warn">Monitor</span>
@@ -376,6 +646,238 @@
         <div class="notes">Best all-around option balancing reassurance and diagnostics.</div>
       </section>
     </div>
+
+    <div class="section-title">
+      <div>
+        <h2>Preferred Direction · Option 5 (Light)</h2>
+        <p class="meta">Cleaner, lighter layout with boarding pass and gate map integrated</p>
+      </div>
+      <div class="pill">Recommended Path</div>
+    </div>
+
+    <div class="sub-grid">
+      <section class="dir">
+        <div class="dir-head">
+          <div>
+            <h3>5A · Home + Boarding Pass</h3>
+            <p class="dir-sub">Primary confidence + digital pass in one glance</p>
+          </div>
+          <span class="pill">Light</span>
+        </div>
+        <div class="phone">
+          <div class="kpi">
+            <div class="score">81%</div>
+            <div class="small">Door2Gate confidence · Leave in 15 min</div>
+            <div class="bar"><div class="fill" style="width:81%"></div></div>
+          </div>
+          <div class="card">
+            <div class="row"><span>Boarding Pass</span><strong>FR2419 · Group 3</strong></div>
+            <div class="row"><span>Airline</span><span>Frontier</span></div>
+            <div class="row"><span>Seat</span><span>14A</span></div>
+            <div class="row"><span>Boarding</span><span>6:10 PM</span></div>
+            <div class="row"><span>ETA to gate</span><span>5:58 PM</span></div>
+          </div>
+          <div class="chips">
+            <span class="chip ok">Pass Ready</span>
+            <span class="chip warn">Gate B18</span>
+          </div>
+        </div>
+        <div class="notes">Reduces context switching by keeping pass details in the same reassurance surface.</div>
+      </section>
+
+      <section class="dir">
+        <div class="dir-head">
+          <div>
+            <h3>5B · Gate Map Focus</h3>
+            <p class="dir-sub">Map-first navigation for terminal confidence</p>
+          </div>
+          <span class="pill">Map</span>
+        </div>
+        <div class="phone">
+          <div class="card">
+            <div class="row"><span>Terminal</span><span>B</span></div>
+            <div class="row"><span>Current</span><span>Security Exit</span></div>
+            <div class="row"><span>Gate</span><strong>B18 (7 min walk)</strong></div>
+          </div>
+          <div class="card">
+            <div class="small">Gate Map</div>
+            <svg viewBox="0 0 240 70" width="100%" height="56" aria-label="Gate map mockup">
+              <rect x="6" y="10" width="228" height="50" rx="9" fill="#f0e7da" stroke="#d1c4b1"/>
+              <path d="M18 34 H212" stroke="#8e8376" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="64" cy="34" r="5" fill="#6c9ca5"/>
+              <circle cx="176" cy="34" r="5" fill="#4b9f7b"/>
+              <text x="52" y="51" fill="#6a5e51" font-size="10">You</text>
+              <text x="166" y="51" fill="#6a5e51" font-size="10">B18</text>
+            </svg>
+          </div>
+          <div class="chips">
+            <span class="chip ok">Route Clear</span>
+          </div>
+        </div>
+        <div class="notes">Makes final-terminal uncertainty easier with simple wayfinding and walking-time cues.</div>
+      </section>
+
+      <section class="dir">
+        <div class="dir-head">
+          <div>
+            <h3>5C · Unified Trip Wallet</h3>
+            <p class="dir-sub">Confidence, pass, and map in a tabbed card stack</p>
+          </div>
+          <span class="pill">Unified</span>
+        </div>
+        <div class="phone">
+          <div class="tabs4">
+            <span class="chip ok">Confidence</span>
+            <span class="chip">Flight Info</span>
+            <span class="chip">Boarding Pass</span>
+            <span class="chip">Gate Map</span>
+          </div>
+          <div class="card">
+            <div class="row"><span>Now</span><strong>80% On Track</strong></div>
+            <div class="row"><span>Airline</span><span>Frontier (FR2419)</span></div>
+            <div class="row"><span>Flight status</span><span>On-time</span></div>
+            <div class="row"><span>Gate</span><span>B18</span></div>
+            <div class="row"><span>Boarding</span><span>6:10 PM</span></div>
+            <div class="row"><span>ETA to gate</span><span>5:58 PM</span></div>
+          </div>
+          <div class="card">
+            <div class="row"><span>Offline</span><span>No</span></div>
+            <div class="row"><span>Last update</span><span>24 sec ago</span></div>
+          </div>
+          <div class="cta">Open Gate Map</div>
+        </div>
+        <div class="notes">Best candidate for implementation: stays clean while exposing key travel artifacts.</div>
+      </section>
+    </div>
+
+    <div class="section-title">
+      <div>
+        <h2>End-to-End User Journey</h2>
+        <p class="meta">Door2Gate flow from onboarding to gate arrival</p>
+      </div>
+      <div class="pill">Core Journey</div>
+    </div>
+
+    <div class="journey-grid">
+      <article class="journey-step">
+        <span class="step-num">Step 1</span>
+        <h3>Onboarding</h3>
+        <p>User installs/open app and grants key permissions with minimal friction.</p>
+        <ul class="journey-list">
+          <li>Welcome + value promise in one screen.</li>
+          <li>Enable location + notifications.</li>
+          <li>Optional account sign-in for saved trips.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step">
+        <span class="step-num">Step 2</span>
+        <h3>Trip Setup</h3>
+        <p>User enters flight details and gets an immediate confidence baseline.</p>
+        <ul class="journey-list">
+          <li>Auto-detect airline from flight number.</li>
+          <li>Set departure point and preferred buffer.</li>
+          <li>First confidence score appears in under a few seconds.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step">
+        <span class="step-num">Step 3</span>
+        <h3>Pre-Departure Monitoring</h3>
+        <p>User checks one source of truth instead of juggling multiple apps.</p>
+        <ul class="journey-list">
+          <li>Confidence %, Flight Status, and ETA to Gate always visible.</li>
+          <li>Boarding Pass and Gate Map available from same surface.</li>
+          <li>Trend + “what changed” messaging builds trust.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step">
+        <span class="step-num">Step 4</span>
+        <h3>In-Transit Guidance</h3>
+        <p>System proactively alerts user to disruptions with clear next actions.</p>
+        <ul class="journey-list">
+          <li>Push: traffic/TSA/weather impact changes.</li>
+          <li>Action card: leave now / hold / alternate checkpoint.</li>
+          <li>Freshness timestamps prevent stale-data confusion.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step">
+        <span class="step-num">Step 5</span>
+        <h3>Airport Execution</h3>
+        <p>User moves from security to gate with confidence and low stress.</p>
+        <ul class="journey-list">
+          <li>Digital boarding pass quick-access.</li>
+          <li>Gate map with walking time and route clarity.</li>
+          <li>Live flight status and inbound aircraft ETA to gate.</li>
+        </ul>
+      </article>
+
+      <article class="journey-step">
+        <span class="step-num">Step 6</span>
+        <h3>Gate Arrival</h3>
+        <p>Journey ends with a calm confirmation and useful next-step state.</p>
+        <ul class="journey-list">
+          <li>“You made it” state with final confidence outcome.</li>
+          <li>Boarding countdown remains visible.</li>
+          <li>Prompt for lightweight community update after arrival.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="section-title">
+      <div>
+        <h2>Functional Journey Mockup (iPhone)</h2>
+        <p class="meta">Interactive dummy-data prototype from onboarding to gate arrival</p>
+      </div>
+      <div class="pill">Interactive</div>
+    </div>
+
+    <div class="demo-wrap">
+      <div class="iphone">
+        <div class="iphone-notch"></div>
+        <div class="iphone-screen">
+          <div class="demo-topbar">
+            <span id="demo-step-label">Step 1 of 6</span>
+            <span id="demo-clock">3:12 PM</span>
+          </div>
+          <div class="demo-logo-wrap">
+            <img class="demo-logo" src="brand/door2gate-logo/Door2Gate-logo.png" alt="Door2Gate logo" />
+          </div>
+          <div class="demo-kpi">
+            <div class="demo-score" id="demo-score">--%</div>
+            <div class="demo-sub" id="demo-headline">Loading journey state...</div>
+            <div class="bar"><div class="fill" id="demo-fill" style="width:0%"></div></div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-row"><span>Airline</span><span id="demo-airline">-</span></div>
+            <div class="demo-row"><span>Flight status</span><span id="demo-status">-</span></div>
+            <div class="demo-row"><span>Gate</span><span id="demo-gate">-</span></div>
+            <div class="demo-row"><span>ETA to gate</span><span id="demo-eta">-</span></div>
+          </div>
+          <div class="demo-card" id="demo-secondary-card">
+            <div class="demo-row"><span>Boarding pass</span><span id="demo-pass">Not issued</span></div>
+            <div class="demo-row"><span>Gate map</span><span id="demo-map">Not active</span></div>
+            <div class="demo-row"><span>Last update</span><span id="demo-update">-</span></div>
+          </div>
+          <div class="demo-cta" id="demo-cta">Continue</div>
+
+          <div class="demo-controls">
+            <button type="button" id="demo-prev">Previous</button>
+            <button type="button" id="demo-next">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-side">
+        <h3 id="demo-title">Journey State</h3>
+        <p id="demo-desc">This panel explains what the user sees and why at each stage.</p>
+        <ul class="journey-list" id="demo-bullets">
+          <li>Interactive state details will render here.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -398,6 +900,169 @@
         })
       })
     })
+
+    const journeyStates = [
+      {
+        label: 'Step 1 of 6',
+        title: 'Onboarding',
+        score: 72,
+        headline: 'Welcome to Door2Gate. Set up takes under 60 seconds.',
+        airline: 'Not set',
+        status: 'Pre-setup',
+        gate: '--',
+        eta: '--',
+        pass: 'Not issued',
+        map: 'Not active',
+        update: 'Just now',
+        cta: 'Enable Location + Alerts',
+        desc: 'The user sees immediate value framing and grants permissions in one flow.',
+        bullets: [
+          'Single-screen onboarding with clear value promise.',
+          'Permission prompts are contextual and minimal.',
+          'User feels in control before entering trip details.'
+        ]
+      },
+      {
+        label: 'Step 2 of 6',
+        title: 'Trip Setup',
+        score: 79,
+        headline: 'Trip created. First confidence baseline is live.',
+        airline: 'Frontier (FR2419)',
+        status: 'On-time',
+        gate: 'B18',
+        eta: '5:58 PM',
+        pass: 'Pending retrieval',
+        map: 'Terminal B loaded',
+        update: '18 sec ago',
+        cta: 'Save Trip',
+        desc: 'Flight lookup, airline detection, and confidence initialization complete.',
+        bullets: [
+          'Flight number auto-fills airline, gate, and schedule.',
+          'Confidence score appears immediately after setup.',
+          'User can proceed without account friction.'
+        ]
+      },
+      {
+        label: 'Step 3 of 6',
+        title: 'Pre-Departure Monitoring',
+        score: 84,
+        headline: 'On track. Leave in 16 min for smooth arrival.',
+        airline: 'Frontier (FR2419)',
+        status: 'On-time',
+        gate: 'B18',
+        eta: '5:58 PM',
+        pass: 'Ready · Group 3',
+        map: '7 min walk after TSA',
+        update: '24 sec ago',
+        cta: 'Open Boarding Pass',
+        desc: 'User monitors one confidence-first surface instead of switching apps.',
+        bullets: [
+          'Confidence %, flight status, and ETA to gate are always visible.',
+          'Boarding pass is accessible from the same panel.',
+          'Trend messaging explains change without alarm.'
+        ]
+      },
+      {
+        label: 'Step 4 of 6',
+        title: 'In-Transit Guidance',
+        score: 76,
+        headline: 'TSA increased. Leave now to protect gate arrival.',
+        airline: 'Frontier (FR2419)',
+        status: 'On-time · Boarding 6:10 PM',
+        gate: 'B18',
+        eta: '6:01 PM',
+        pass: 'Ready · Seat 14A',
+        map: 'Use Checkpoint C3',
+        update: '12 sec ago',
+        cta: 'Start Navigation',
+        desc: 'Proactive notifications convert disruptions into clear next actions.',
+        bullets: [
+          'User gets action-oriented alert: what changed and what to do.',
+          'Fallback recommendation appears with checkpoint guidance.',
+          'Freshness timestamp preserves trust during volatility.'
+        ]
+      },
+      {
+        label: 'Step 5 of 6',
+        title: 'Airport Execution',
+        score: 82,
+        headline: 'Inside terminal. Gate map and boarding pass are primary.',
+        airline: 'Frontier (FR2419)',
+        status: 'Boarding soon',
+        gate: 'B18',
+        eta: '5:56 PM',
+        pass: 'Scan ready',
+        map: 'You -> B18 (6 min)',
+        update: '8 sec ago',
+        cta: 'Open Gate Map',
+        desc: 'In-airport mode prioritizes wayfinding and scan-ready documents.',
+        bullets: [
+          'Gate map focuses on live route clarity.',
+          'Boarding pass is one tap away for quick access.',
+          'Confidence remains visible as reassurance layer.'
+        ]
+      },
+      {
+        label: 'Step 6 of 6',
+        title: 'Gate Arrival',
+        score: 91,
+        headline: 'You made it to gate B18 with time to spare.',
+        airline: 'Frontier (FR2419)',
+        status: 'At gate · Boarding in 14 min',
+        gate: 'B18',
+        eta: 'Arrived',
+        pass: 'Ready',
+        map: 'Destination reached',
+        update: 'Now',
+        cta: 'Share Quick Update',
+        desc: 'Journey closes with reassurance, confirmation, and optional contribution.',
+        bullets: [
+          'Arrival confirmation reinforces product trust.',
+          'Boarding countdown remains visible.',
+          'Prompt enables quick community contribution.'
+        ]
+      }
+    ]
+
+    let currentState = 0
+
+    function renderJourneyState() {
+      const s = journeyStates[currentState]
+      document.getElementById('demo-step-label').textContent = s.label
+      document.getElementById('demo-title').textContent = s.title
+      document.getElementById('demo-score').textContent = `${s.score}%`
+      document.getElementById('demo-headline').textContent = s.headline
+      document.getElementById('demo-fill').style.width = `${s.score}%`
+      document.getElementById('demo-airline').textContent = s.airline
+      document.getElementById('demo-status').textContent = s.status
+      document.getElementById('demo-gate').textContent = s.gate
+      document.getElementById('demo-eta').textContent = s.eta
+      document.getElementById('demo-pass').textContent = s.pass
+      document.getElementById('demo-map').textContent = s.map
+      document.getElementById('demo-update').textContent = s.update
+      document.getElementById('demo-cta').textContent = s.cta
+      document.getElementById('demo-desc').textContent = s.desc
+
+      const bullets = document.getElementById('demo-bullets')
+      bullets.innerHTML = ''
+      s.bullets.forEach((point) => {
+        const li = document.createElement('li')
+        li.textContent = point
+        bullets.appendChild(li)
+      })
+    }
+
+    document.getElementById('demo-prev').addEventListener('click', () => {
+      currentState = (currentState - 1 + journeyStates.length) % journeyStates.length
+      renderJourneyState()
+    })
+
+    document.getElementById('demo-next').addEventListener('click', () => {
+      currentState = (currentState + 1) % journeyStates.length
+      renderJourneyState()
+    })
+
+    renderJourneyState()
   </script>
 </body>
 </html>
