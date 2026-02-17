@@ -285,6 +285,21 @@ Consumer app competitors adjacent to Door-to-Gate's use case are strong but frag
 | Flighty | Flight intelligence UX for frequent flyers | Launched 2019 | "Millions of users" |
 _Source: https://blog.google/products-and-platforms/products/maps/20-years-google-maps-20-features/_
 
+### Expanded Discovery Using "Travel Planning Apps" Query
+
+Expanding query terms from "flight tracking" to "travel planning apps" surfaces additional consumer competitors that do not directly solve door-to-gate confidence, but do compete for the same planning moments and user attention.
+
+| Competitor | Category | Relevance to Door-to-Gate | Market-share proxy availability |
+|---|---|---|---|
+| KAYAK Trips | Itinerary + travel planning | Competes in trip organization and trip-day notifications | Public category-level scale available; Trips-specific share not clearly disclosed |
+| Wanderlog | Trip planning + itinerary building | Competes for pre-trip planning and all-in-one workflow expectations | Public usage scale not consistently disclosed |
+| Tripsy | Mobile itinerary planner | Competes for premium personal travel planning use case | Public usage scale not consistently disclosed |
+| Polarsteps | Trip planning/tracking/story capture | Competes for traveler habit and app-home-screen presence | Public usage scale exists at company/app level, not door-to-gate segment share |
+| Roadtrippers | Route and trip planning | Competes on journey-planning mindset and route confidence | Public usage scale not consistently disclosed |
+| Rome2Rio | Multi-modal planning | Competes for route orchestration and planning behavior | Public usage scale varies by source |
+| Omio | Multi-modal travel planning/booking | Competes for planning + booking touchpoint ownership | Public company metrics exist; segment-level share not standardized |
+_Source: https://www.kayak.com/help/tripscalendar_
+
 ### Market Share Analysis
 
 Exact category market share for "door-to-gate confidence apps" is not publicly standardized, so proxy-based share view is used. By scale, Google Maps is a massive incumbent for ground-leg navigation. Flight-tracking incumbents (FlightAware, Flightradar24, Flighty) dominate in-flight status visibility. Itinerary/planning and booking apps (TripIt, Hopper) hold adjacent decision moments, but not unified travel-day confidence ownership.
@@ -299,6 +314,7 @@ Current competitors tend to optimize one leg of the journey:
 - Flight trackers optimize aircraft/flight-state visibility.
 - Travel organizers optimize itinerary centralization.
 - OTAs/booking apps optimize booking economics and flexibility products.
+- Travel planning apps optimize broad itinerary and coordination workflows.
 
 This leaves a positioning gap for a confidence-centric orchestrator purpose-built for uncommon travelers and family coordinators.
 _Positioning Gap: "Decision confidence under uncertainty" is underserved despite strong adjacent tooling._
@@ -370,3 +386,11 @@ _Source: https://www.sita.aero/resources/surveys-reports/2024-sita-passenger-it-
   https://media.hopper.com/news/hopper-named-a-winner-in-the-4th-annual-world-travel-tech-awards
 - Flighty launch timing and user proxy:  
   https://flighty.com/press
+- Expanded travel planning competitors:  
+  https://www.kayak.com/help/tripscalendar  
+  https://wanderlog.com/  
+  https://tripsy.app/  
+  https://www.polarsteps.com/  
+  https://roadtrippers.com/  
+  https://help.rome2rio.com/en/support/solutions/articles/22000280937-trip-planner  
+  https://www.omio.com/apps

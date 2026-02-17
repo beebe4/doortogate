@@ -2,11 +2,12 @@
 stepsCompleted: ["step-01-init", "step-02-discovery", "step-02b-vision", "step-02c-executive-summary", "step-03-success", "step-04-journeys", "step-05-domain", "step-06-innovation", "step-07-project-type", "step-08-scoping", "step-09-functional", "step-10-nonfunctional", "step-11-polish"]
 inputDocuments:
   - _bmad-output/planning-artifacts/product-brief-doortogate-2026-02-17.md
+  - _bmad-output/planning-artifacts/research/market-travel-visibility-anxiety-reduction-competitor-landscape-research-2026-02-17.md
   - docs/mockups/option-1.html
 workflowType: 'prd'
 projectType: 'greenfield'
 briefCount: 1
-researchCount: 0
+researchCount: 1
 projectDocsCount: 1
 date: 2026-02-17
 author: Ben
@@ -34,7 +35,7 @@ classification:
 
 ### What Makes This Special
 
-**First-to-Market Aggregation:** First solution to combine traffic, TSA, flight, weather, turbulence (turbli.com integration), and community data in unified "door-to-gate" view covering the full journey anxiety, not just the flight portion.
+**Confidence-Orchestrator Positioning:** Incumbents are strong but siloed (maps, flight tracking, itinerary, booking). Door-to-Gate is positioned as a cross-silo confidence orchestrator for anxious occasional travelers, converting fragmented operational signals into one trusted "leave now / hold" decision.
 
 **Anxiety-Reducing UX:** Interface and confidence algorithm specifically designed to reduce anxiety by providing permission to relax, not just more data. The holistic view with single confidence score eliminates mental burden of constant recalculation across fragmented sources.
 
@@ -63,7 +64,9 @@ classification:
 
 **Behavioral Success Indicators:**
 - **App Becomes Single Source of Truth:** 80% of users report checking only Door-to-Gate Pulse during active travel monitoring (vs. checking 4-5 fragmented apps)
+- **Cross-Check Reduction:** 60%+ of users reduce cross-checking of 3+ external apps by their second tracked trip
 - **Trust Development:** 70% of users report "trusting the app's confidence score" within first 3 uses; users act on app recommendations without second-guessing
+- **Recommendation Acceptance:** 65%+ acceptance rate for "leave now" recommendations within first 90 days
 - **Optimized Departure Timing:** Average airport arrival time moves from 180 minutes to 90 minutes before flight (60-90 minute optimal window)
 - **Reduced Family Stress:** 75% of users report "less stressful travel day" after using app; travel companions validate improved experience
 - **Engagement & Retention:** 85% retention rate for users with 2+ trips per year; 60% PWA installation rate
@@ -104,6 +107,8 @@ classification:
 - API uptime: 99.5%+ for all critical integrations
 - Push notification delivery: 95%+ success rate
 - Error rate: < 0.5% of user sessions
+- False-alert rate: < 10% for "leave now" recommendations
+- Missed-critical-alert rate: < 2% for material disruption events within monitored window
 
 **Integration Stability:**
 - All 4 critical data sources (traffic, flight, weather, TSA) operational
@@ -145,7 +150,10 @@ classification:
 - Flight entry by flight number with auto-population (departure time, gate, airline, destination)
 - Automatic home location detection via GPS (user can override)
 - Real-time confidence score: 0-100% with color-coded indicator (green 80%+, yellow 60-79%, red <60%)
+- Explainability panel: "Why confidence changed" with top contributing factors
 - Comprehensive data display: Drive/GPS time, TSA wait, flight status, incoming aircraft, weather impact
+- Source freshness timestamps for each data card and score update
+- Uncertainty indicator when one or more sources are stale/partial
 - All data consolidated in single scrollable dashboard matching mockup UX
 
 **2. Critical Data Integrations**
@@ -170,9 +178,12 @@ classification:
 - Weighted calculation: TSA wait (highest weight), traffic (second), weather (third)
 - Real-time recalculation on data updates (< 500ms)
 - Alert thresholds trigger notifications on significant changes
+- Degraded-mode behavior when sources fail, including transparent fallback messaging
 
-**6. All US Airport Coverage**
-- Support all commercial airports with scheduled passenger service
+**6. Phased Airport Coverage**
+- Phase 1 (MVP): Top 20 US airports by passenger volume
+- Phase 2: Expand to top 50 airports after data quality thresholds are met
+- Phase 3: Roll out to all commercial US airports with scheduled passenger service
 - Airport database (IATA codes, locations, terminals)
 - Checkpoint mapping for major airports (top 50); generic "TSA Security" for smaller airports
 - Community contributions fill in specific checkpoint details over time
@@ -239,6 +250,7 @@ classification:
 - Post-trip analytics and pattern learning
 
 **Monetization Evolution:**
+Monetization optimization is deferred until trust and retention thresholds are met (confidence trust, recommendation acceptance, and trip-to-trip retention KPIs).
 - Freemium model: Premium features for $4.99/month
 - Partnership revenue (parking, rideshare, insurance affiliates)
 - Airline B2B licensing of confidence algorithm
@@ -478,8 +490,8 @@ She prepares weekly report showing 89% confidence algorithm accuracy, 5,200 acti
 
 ### Detected Innovation Areas
 
-**Market-First Aggregation Architecture:**
-Door-to-Gate Pulse is the first consumer product to unify traffic (Google Maps/Mapbox), TSA wait times (community + MyTSA API), flight status (FlightAware/AviationStack), incoming aircraft tracking, weather impact (OpenWeatherMap), turbulence forecasts (turbli.com), and community reports into a single confidence algorithm. Existing solutions force travelers to mentally synthesize data across 4-6 fragmented apps.
+**Confidence-Orchestrator Architecture:**
+Door-to-Gate Pulse unifies traffic (Google Maps/Mapbox), TSA wait times (community + MyTSA API), flight status (FlightAware/AviationStack), incoming aircraft tracking, weather impact (OpenWeatherMap), turbulence forecasts (turbli.com), and community reports into a single confidence algorithm. Existing solutions force travelers to mentally synthesize data across 4-6 fragmented apps.
 
 **Anxiety-Centered Design Philosophy:**
 Unlike data-first competitors (FlightAware, FlightStats), the entire UX optimizes for anxiety reduction through decisional clarity. The confidence score provides permission to relax or permission to leave early — answering "Am I going to make it?" rather than presenting raw data for user interpretation. Color-coded thresholds (green 80%+, yellow 60-79%, red <60%) bypass cognitive load.
@@ -508,10 +520,42 @@ Foundation designed for AI evolution: predictive recommendations based on user p
 - FlightAware (flight-only, no door-to-gate coverage)
 - Google Maps (drive time only, no travel context)
 - Airline apps (post-security only, no pre-arrival planning)
+- KAYAK Trips, Wanderlog, Tripsy (travel planning and itinerary workflow ownership)
+- Polarsteps, Roadtrippers, Rome2Rio, Omio (planning habit and multi-leg journey orchestration)
 
 None combine full journey or optimize for anxiety reduction.
 
+**Competitor Benchmark (Consumer Apps):**
+| Competitor | Release Timing | Market Proxy | Gap vs Door-to-Gate |
+|---|---|---|---|
+| Google Maps | 2005 | 2B+ monthly users | Strong ground ETA, weak door-to-gate confidence orchestration |
+| FlightAware | 2005 | 12M+ passenger users | Strong flight status, weak pre-airport decision confidence |
+| Flightradar24 | 2006 | 5M+ daily users, 100M+ downloads | Strong flight visibility, limited travel-day orchestration |
+| TripIt | 2006 | 22M+ travelers | Strong itinerary organization, limited real-time confidence actions |
+| Hopper | 2007 (app growth era ~2015+) | 120M+ downloads | Strong booking economics, not anxiety-reduction timing orchestration |
+| Flighty | 2019 | Millions of users | Strong flight UX, limited full journey orchestration |
+
+**Tiered Competitor Map (Expanded via "Travel Planning Apps"):**
+- **Tier 1 - Direct Adjacent (high overlap):** Google Maps, FlightAware, Flightradar24, TripIt, Flighty
+- **Tier 2 - Planning Workflow Competitors:** KAYAK Trips, Wanderlog, Tripsy
+- **Tier 3 - Multi-Modal/Route Planning Competitors:** Roadtrippers, Rome2Rio, Omio, Polarsteps
+- **Strategic Implication:** We do not need to beat every feature in Tier 2/3. We need to win the "travel-day confidence decision" wedge with trust, timeliness, and explainability.
+
 ### Validation Approach
+
+### Assumptions and Validation
+
+**Assumption 1: Users prefer decision confidence over raw data breadth**
+- Experiment: A/B test score-first dashboard vs multi-card detail-first dashboard
+- Pass Threshold: score-first cohort shows +20% recommendation acceptance with no increase in missed-critical-alert rate
+
+**Assumption 2: First successful trip is the retention hinge**
+- Experiment: track first-trip completion outcome vs 30/90-day retention
+- Pass Threshold: users with first-trip success retain at least 2.5x better than first-trip failure cohort
+
+**Assumption 3: Social proof materially improves adoption**
+- Experiment: add high-quality social proof (recent testimonials, usage counters, review snippets) to onboarding and app store copy
+- Pass Threshold: +15% install/start rate lift and +10% completion of first monitored trip
 
 **Phase 1: Algorithm Accuracy (Months 1-3)**
 - Target: 85% prediction accuracy (user arrives with 15+ minutes gate buffer when confidence >80%)
@@ -1279,4 +1323,3 @@ Organic search is secondary to word-of-mouth but critical for long-tail discover
 - **NFR96:** Installed PWA launches in <500ms to splash screen
 - **NFR97:** PWA operates offline with degraded functionality (cached data, no API updates)
 - **NFR98:** PWA runs in standalone mode without browser chrome
-
